@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+mvn test jacoco:report
+mvn surefire-report:report-only
+mvn site -DgenerateReports=false
