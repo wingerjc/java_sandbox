@@ -1,37 +1,36 @@
 package com.example;
 
+import com.example.food.Food;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class AppTest {
   @Test
   public void dummy_test() {
     App.main(null);
-    assertTrue(true);
   }
 
   @Test
-  public void double_name() {
-    App app = new App();
-    String result = app.doubleName();
-
-    assertEquals("foo foo", result);
+  public void create_app() {
+    App a = new App();
   }
 
   @Test
-  public void do_mocks() {
-    App a = Mockito.mock(App.class);
-    doReturn("abcd").when(a).doubleName();
+  public void eat_food() {
+    Food f = Mockito.mock(Food.class);
 
-    App.app = a;
-    App.main(null);
-
-    verify(a).doubleName();
-
+    when(f.name())
+        .thenReturn("apple");
+    when(f.bitesLeft())
+        .thenReturn(3, 0);
+    when(f.bite())
+        .thenReturn(2);
+    when(f.priceInDollars())
+        .thenReturn("$5.50");
+    doNothing()
+        .when(f).eatAll();
+    App.eatFood(f);
   }
 }
