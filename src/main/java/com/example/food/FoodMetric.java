@@ -1,8 +1,9 @@
 package com.example.food;
 
+import lombok.Data;
 import lombok.Value;
 
-@Value
+@Data
 /** Measurements about a food. */
 public class FoodMetric {
 

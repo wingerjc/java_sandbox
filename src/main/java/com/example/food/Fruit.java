@@ -11,24 +11,44 @@ import java.util.NoSuchElementException;
  * </ul>
  */
 public class Fruit implements Food {
+
+  int totalBites;
+
+  PriceFinder priceFinder;
+
+  String name;
+
+  public Fruit(FoodMetric metric, PriceFinder priceFinder, String name) {
+    int weight = metric.getGramWeight();
+    double density = metric.getDensity();
+    totalBites = (int)Math.ceil(weight / density / 3);
+
+    this.priceFinder = priceFinder;
+    this.name = name;
+  }
+
   @Override
   public int bitesLeft() {
-    return 0;
+    return totalBites;
   }
 
   @Override
   public int totalBites() {
-    return 0;
+    return -1;
   }
 
   @Override
   public int bite() throws NoSuchElementException {
-    return 0;
+    if (totalBites <= 0) {
+      throw new NoSuchElementException();
+    }
+    totalBites -= 1;
+    return totalBites;
   }
 
   @Override
   public int bite(int numBites) throws IndexOutOfBoundsException {
-    return 0;
+    return -1;
   }
 
   @Override
@@ -37,16 +57,23 @@ public class Fruit implements Food {
 
   @Override
   public int getWeight() {
-    return 0;
+    return -1;
   }
 
   @Override
   public String name() {
-    return "";
+    System.out.println(this.process(name.length()));
+    return name;
   }
 
   @Override
   public String priceInDollars() {
-    return "";
+    double pricePerKg = priceFinder.getPrice(name);
+
+    return String.format("$%.2f", pricePerKg);
+  }
+
+  protected int process(int i) {
+    return i + 7;
   }
 }

@@ -7,7 +7,9 @@ import com.example.food.PriceFinder;
 public class App {
 
   public static void main(String[] args) {
-    FoodMetric m = new FoodMetric(250, 0.95);
+    FoodMetric m = new FoodMetric()
+        .setGramWeight(250)
+        .setDensity(0.95);
     PriceFinder p = new PriceFinder();
     // Food f = new Fruit("Banana", m, p);
     // eatFood(f);
